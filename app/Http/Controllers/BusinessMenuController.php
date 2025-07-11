@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\BusinessMenu;
 use Illuminate\Http\Request;
+use App\Mail\MenuCreatedMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class BusinessMenuController extends Controller
 {
@@ -42,13 +44,19 @@ class BusinessMenuController extends Controller
         ]);
 
         // Create or get existing user by email
+        $password = Str::random(12);
         $user = User::firstOrCreate(
             ['email' => $validated['user_email']],
             [
                 'name' => explode('@', $validated['user_email'])[0],
-                'password' => Hash::make(Str::random(12)),
+                'password' => Hash::make($password),
             ]
         );
+
+        // If user is new, send login credentials via email
+        if ($user->wasRecentlyCreated) {
+            Mail::to($user->email)->send(new MenuCreatedMail($user, $password, $validated['business_name'] ?? 'Business'));
+        }
 
         // Log the user in
         Auth::login($user);
@@ -63,7 +71,8 @@ class BusinessMenuController extends Controller
         $menu->save();
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Menu created and user logged in successfully!');
+        return redirect()->back()->with('success', 'Menu created and user logged in successfully! Login credentials sent to your email.');
+
     }
 
     /**

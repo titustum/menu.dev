@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('business_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('user_email');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
             $table->string('business_name');
             $table->foreignId('business_category_id')->constrained('business_categories');
             $table->string('mpesa_paybill')->nullable();
