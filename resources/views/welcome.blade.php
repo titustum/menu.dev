@@ -20,7 +20,10 @@
                 <!-- Form Card -->
                 <div
                     class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 sm:p-10 max-w-2xl mx-auto">
-                    <form action="/create-menu" method="POST" class="space-y-6">
+                    <form action="{{ route('menus.store') }}" method="POST" class="space-y-6">
+
+                        @csrf
+
                         <!-- User Email -->
                         <div>
                             <label for="user_email" class="block text-sm font-semibold text-gray-700 mb-2">

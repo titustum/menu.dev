@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -20,5 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+
+//menus
+Route::resource('menus', MenuController::class)->names('menus');
 
 require __DIR__.'/auth.php';
