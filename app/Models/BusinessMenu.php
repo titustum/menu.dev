@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Business extends Model
+class BusinessMenu extends Model
 {
-    protected $fillable = ['user_email', 'business_name', 'business_category_id', 'mpesa_paybill', 'mpesa_account'];
+     protected $fillable = ['user_email', 'business_name', 'business_category_id', 'mpesa_paybill', 'mpesa_account'];
 
     public function user()
     {
@@ -18,6 +18,4 @@ class Business extends Model
     {
         return $this->belongsTo(BusinessCategory::class);
     }
-
-
 }

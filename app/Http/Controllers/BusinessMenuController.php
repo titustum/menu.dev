@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Business;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\BusinessMenu;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class MenuController extends Controller
+class BusinessMenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -55,7 +54,7 @@ class MenuController extends Controller
         Auth::login($user);
 
         // Save the menu data, associating it with the user
-        $menu = new Business();
+        $menu = new BusinessMenu();
         $menu->user_id = $user->id;
         $menu->business_name = $validated['business_name'];
         $menu->business_category_id = $validated['business_category'];
@@ -70,7 +69,7 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BusinessMenu $businessMenu)
     {
         //
     }
@@ -78,7 +77,7 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BusinessMenu $businessMenu)
     {
         //
     }
@@ -86,7 +85,7 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, BusinessMenu $businessMenu)
     {
         //
     }
@@ -94,7 +93,7 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BusinessMenu $businessMenu)
     {
         //
     }

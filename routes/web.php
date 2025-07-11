@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\BusinessMenuController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -23,6 +23,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 //menus
-Route::resource('menus', MenuController::class)->names('menus');
+Route::resource('menus', BusinessMenuController::class)->names('menus');
 
 require __DIR__.'/auth.php';
