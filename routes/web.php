@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\WelcomeController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome3');
-})->name('home');
+Route::get('/', WelcomeController::class)->name('home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -21,7 +20,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-
-Route::resource('menus', \App\Http\Controllers\MenuController::class)->names('menus');
 
 require __DIR__.'/auth.php';
